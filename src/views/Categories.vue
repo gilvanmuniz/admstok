@@ -8,14 +8,15 @@
       </div>
     </div>
     <div class="vuex">
-      {{ contador }}
-      <button v-on:click="addCount">+</button>
+      {{ count }}
+      <button class="btn btn-success" v-on:click="increments">+</button>
     </div>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import { mapState, mapMutations } from 'vuex'
 export default {
   data(){
     return {
@@ -28,17 +29,14 @@ export default {
         this.categories = resp.data
       })
     },
-    addCount(){
-      this.$store.commit('increments')
-    }
+   
+    ...mapMutations(['increments'])
   },
   created(){
     this.getCategories()
   },
   computed:{
-    contador(){
-      return this.$store.state.count
-    }
+      ...mapState(['count'])
   }
 }
 
@@ -67,6 +65,9 @@ export default {
   font-size: 30px;
   font-weight: 900;
   align-items: center;
+  button{
+    font-size: 32px;
+  }
 }
 
 </style>
