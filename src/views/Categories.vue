@@ -7,6 +7,10 @@
         <div class="dados">{{ category.name }}</div>        
       </div>
     </div>
+    <div class="vuex">
+      {{ contador }}
+      <button v-on:click="addCount">+</button>
+    </div>
   </div>
 </template>
 
@@ -23,10 +27,18 @@ export default {
       axios.get('http://localhost:8081/categories').then(resp => {
         this.categories = resp.data
       })
+    },
+    addCount(){
+      this.$store.commit('increments')
     }
   },
   created(){
     this.getCategories()
+  },
+  computed:{
+    contador(){
+      return this.$store.state.count
+    }
   }
 }
 
@@ -48,6 +60,13 @@ export default {
       padding: 0.7%;
     }
   }
+}
+.vuex{
+  display: flex;
+  flex-direction: column;
+  font-size: 30px;
+  font-weight: 900;
+  align-items: center;
 }
 
 </style>
