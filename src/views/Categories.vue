@@ -11,16 +11,23 @@
       {{ count }}
       <button class="btn btn-success" v-on:click="increments">+</button>
     </div>
+    <hr>
+    <div class="produtos">
+      {{ products }}
+      <input v-model="produtos" type="text">
+      <button v-on:click="addProdutos(produtos)" class="btn btn-primary mt-4">+</button>
+    </div>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
-import { mapState, mapMutations } from 'vuex'
+import { mapState, mapMutations, mapActions } from 'vuex'
 export default {
   data(){
     return {
-      categories:{}
+      categories:{},
+      produtos:''
     }
   },
   methods:{
@@ -30,13 +37,14 @@ export default {
       })
     },
    
-    ...mapMutations(['increments'])
+    ...mapMutations(['increments']),
+    ...mapActions(['addProdutos'])
   },
   created(){
     this.getCategories()
   },
   computed:{
-      ...mapState(['count'])
+      ...mapState(['count', 'products'])
   }
 }
 
@@ -68,6 +76,14 @@ export default {
   button{
     font-size: 32px;
   }
+}
+.produtos{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+    input{
+      border-bottom: solid 1px black;
+    }
 }
 
 </style>
