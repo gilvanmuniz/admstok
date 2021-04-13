@@ -1,23 +1,60 @@
-import { createStore } from 'vuex'
+import Vuex from 'vuex'
+import Axios from 'axios'
 
-export default createStore({
+// export default createStore({
+//   state: {
+//     count:0,
+//     products:[]
+//   },
+//   mutations: {
+//     increments(state){
+//       state.count++
+//     },
+//     addProducts(state, payload){
+//       state.products.push(payload)
+//     }
+//   },
+//   actions: {
+//      addProdutos({ commit } ,payload){
+//           commit('addProducts', payload)
+//      }
+//   },
+//   modules: {
+//   }
+// })
+
+const categories = {
   state: {
-    count:0,
+    categories:[]
+  }
+}
+
+const products = {
+  state: {
     products:[]
   },
-  mutations: {
-    increments(state){
-      state.count++
-    },
-    addProducts(state, payload){
-      state.products.push(payload)
+
+  mutations:{
+    getProductsM(state, payload){
+        state.products = payload
     }
   },
-  actions: {
-     addProdutos({ commit } ,payload){
-          commit('addProducts', payload)
-     }
-  },
+
+  actions:{
+    getProducts({ commit }){
+      Axios.get('http://localhost:8081/products').then(resp => {
+        console.log(resp.data)
+        commit('getProductsM', resp.data )
+      })
+    }
+  }
+}
+
+const store = new Vuex.Store({
   modules: {
+    categories,
+    products
   }
 })
+
+export default store

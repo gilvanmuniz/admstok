@@ -1,6 +1,7 @@
 import dados from '.';
 <template>
   <div class="principal">
+    
     <div class="principal">
       <h1>Products</h1>
       <div>
@@ -13,7 +14,7 @@ import dados from '.';
           </li>
         </ul>
       </div>
-      <div v-for="dado in dados" :key="dado.id">
+      <div v-for="dado in products.products " :key="dado.id">
         <ul>
           <li>
             <div class="dados" id="id">{{ dado.id }}</div>
@@ -29,18 +30,25 @@ import dados from '.';
 </template>
 
 <script>
-import dados from "./../data/data.json";
+
+import { mapState, mapActions } from 'vuex'
 export default {
   data() {
     return {
-      dados: dados,
+     
     };
   },
   methods:{
-
+    ...mapActions(['getProducts']),
     dinheiro(valor){
       return 'R$ ' + valor.toFixed(2)
     }
+  },
+  computed:{
+    ...mapState(['products'])
+  },
+  created(){
+    this.getProducts()
   }
 };
 </script>
