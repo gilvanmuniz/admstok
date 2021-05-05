@@ -39,7 +39,7 @@ export default {
     };
   },
   methods:{
-    ...mapActions(['getProducts']),
+    ...mapActions('products',['getProducts']),
     dinheiro(valor){
       return 'R$ ' + valor.toFixed(2)
     }
