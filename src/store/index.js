@@ -1,6 +1,7 @@
 import Vuex from 'vuex'
 // import Axios from 'axios'
 import { store as products} from './../pages/products'
+import { store as categories } from './../pages/categories'
 
 // export default createStore({
 //   state: {
@@ -24,11 +25,11 @@ import { store as products} from './../pages/products'
 //   }
 // })
 
-const categories = {
-  state: {
-    categories:[]
-  }
-}
+// const categories = {
+//   state: {
+//     categories:[]
+//   }
+// }
 
 // const products = {
 //   state: {
