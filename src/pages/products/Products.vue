@@ -1,9 +1,11 @@
 import dados from '.';
 <template>
   <div class="principal">
-    
     <div class="principal">
-      <h1>Products</h1>
+      <div class="topo">
+        <h1>Products</h1>
+        <button class="btn btn-success"><router-link class="link" to="/products-register">Add Produto</router-link> </button>
+      </div>
       <div>
         <ul>
           <li>
@@ -14,7 +16,7 @@ import dados from '.';
           </li>
         </ul>
       </div>
-      <div v-for="dado in products.products " :key="dado.id">
+      <div v-for="dado in products.products" :key="dado.id">
         <ul>
           <li>
             <div class="dados" id="id">{{ dado.id }}</div>
@@ -30,64 +32,73 @@ import dados from '.';
 </template>
 
 <script>
-
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions } from "vuex";
 export default {
   data() {
-    return {
-     
-    };
+    return {};
   },
-  methods:{
-    ...mapActions('products',['getProducts']),
-    dinheiro(valor){
-      return 'R$ ' + valor.toFixed(2)
-    }
+  methods: {
+    ...mapActions("products", ["getProducts"]),
+    dinheiro(valor) {
+      return "R$ " + valor.toFixed(2);
+    },
   },
-  computed:{
-    ...mapState(['products'])
+  computed: {
+    ...mapState(["products"]),
   },
-  created(){
-    this.getProducts()
-  }
+  created() {
+    this.getProducts();
+  },
 };
 </script>
 
 <style lang="scss" scoped>
- .principal{
-   padding: 1%;
-   padding-top: 0.1%;
-   margin-top: -1%;
-   ul{
-     list-style: none;
-     li{
-       display: flex;
-       justify-content: space-around;
-       border: solid 1px grey;
-       padding: 1%;
-     }
-     .dados{
-       padding: 0.7%;
-       border-right: solid 1px grey;
-       border-left: solid 1px grey;
-     }
-     #id{
-       min-width: 10%;
-     }
+.principal {
+  padding: 1%;
+  padding-top: 0.1%;
+  margin-top: -1%;
+  .topo{
+    display: flex;
+    justify-content: space-around;
+    padding: 2.1%;
+    .btn{
+      max-height: 50px;
+      .link{
+        text-decoration: none;
+        color: white;
+      }
+    }
+  }
+  ul {
+    list-style: none;
+    li {
+      display: flex;
+      justify-content: space-around;
+      border: solid 1px grey;
+      padding: 1%;
+    }
+    .dados {
+      padding: 0.7%;
+      border-right: solid 1px grey;
+      border-left: solid 1px grey;
+    }
+    #id {
+      min-width: 10%;
+    }
 
-     #name{
-       min-width: 35%;
-       color: blue;
-     }
-     #descricao{
-       min-width: 35%;      
-     }
-     #amount{
-       min-width: 10%;
-     }
-     #price{
-       min-width: 14%;
-     }
-   }
- }
+    #name {
+      min-width: 35%;
+      color: blue;
+    }
+    #descricao {
+      min-width: 35%;
+    }
+    #amount {
+      min-width: 10%;
+    }
+    #price {
+      min-width: 14%;
+    }
+  }
+}
 </style>
