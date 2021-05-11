@@ -4,7 +4,7 @@ import dados from '.';
     <div class="principal">
       <div class="topo">
         <h1>Products</h1>
-        <button class="btn btn-success"><router-link class="link" to="/products-register">Add Produto</router-link> </button>
+        <button class="btn btn-success"><router-link class="link" to="/register">Add Produto</router-link> </button>
       </div>
       <div>
         <ul>

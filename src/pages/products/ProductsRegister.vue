@@ -5,18 +5,18 @@
       <form>
         <div class="row">
           <label for="">Descrição</label>
-          <input  class="ml-3" type="text" />
+          <input v-model="form.name"  class="ml-3" type="text" />
         </div>
         <div class="row">
           <label for="">Quantidade</label>
-          <input class="ml-3" type="text" />
+          <input v-model="form.amount" class="ml-3" type="text" />
         </div>
         <div class="row">
           <label for="">Preço</label>
-          <input  class="ml-3" type="text" />
+          <input v-model="form.price"  class="ml-3" type="text" />
         </div>
         <div class="botao">
-          <button class="btn btn-primary">Cadastrar</button>
+          <button v-on:click="addProdutos" class="btn btn-primary">Cadastrar</button>
         </div>
       </form>
     </div>
@@ -24,7 +24,34 @@
 </template>
 
 <script>
-export default {};
+import { mapActions } from 'vuex'
+export default {
+  data(){
+    return {
+      form:{
+        name: '',
+        amount: '',
+        price: ''
+      }
+    }
+  },
+  methods: {
+     ...mapActions('products', ['addProducts']),
+     
+     addProdutos(add){
+       add = {
+         name:this.form.name,
+         amount:this.form.amount,
+         price:this.form.price
+       }
+       this.addProducts(add)
+
+      this.form.name = ''
+      this.form.amount = ''
+      this.form.price = ''
+     }
+  }
+};
 </script>
 
 <style lang="scss" scoped>

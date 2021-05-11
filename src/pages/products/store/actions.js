@@ -8,4 +8,10 @@ export const getProducts = ({ commit }) => {
     })
 }
 
+export const addProducts = ({ commit }, add ) => {
+    Axios.post('http://localhost:8081/products', add).then((resp) => {
+         commit(types.ADD_PRODUCTS, resp.data)
+    })
+ }
+
 
