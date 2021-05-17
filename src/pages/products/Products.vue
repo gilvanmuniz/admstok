@@ -4,7 +4,9 @@ import dados from '.';
     <div class="principal">
       <div class="topo">
         <h1>Products</h1>
-        <button class="btn btn-success"><router-link class="link" to="/register">Add Produto</router-link> </button>
+        <button class="btn btn-success">
+          <router-link class="link" to="/register">Add Produto</router-link>
+        </button>
       </div>
       <div>
         <ul>
@@ -13,19 +15,30 @@ import dados from '.';
             <div class="dados" id="descricao"><strong>Descrição</strong></div>
             <div class="dados" id="amount"><strong>Quantidade</strong></div>
             <div class="dados" id="price"><strong>Preço</strong></div>
+            <div class="dados" id="action"><strong>Action</strong></div>
           </li>
         </ul>
       </div>
-      <div v-for="dado in products.products" :key="dado.id">
+      <div v-if="products.products.length > 0">
+         <div v-for="dado in products.products" :key="dado.id">
         <ul>
           <li>
             <div class="dados" id="id">{{ dado.id }}</div>
             <div class="dados" id="name">{{ dado.name }}</div>
             <div class="dados" id="amount">{{ dado.amount }}</div>
             <div class="dados" id="price">{{ dinheiro(dado.price) }}</div>
+            <div class="dados" id="action">
+              <router-link
+                v-bind:to="{ name: 'update', params: { id: dado.id } }"
+              >
+              <button class="mybt">Up</button>
+              </router-link>
+            </div>
           </li>
         </ul>
       </div>
+      </div>
+     
       <hr />
     </div>
   </div>
@@ -39,8 +52,15 @@ export default {
   },
   methods: {
     ...mapActions("products", ["getProducts"]),
+
     dinheiro(valor) {
-      return "R$ " + valor.toFixed(2);
+      if (valor) {
+        valor =  valor.toFixed(2)
+        return "R$ " + valor
+      }
+      else{
+        return "R$ " + valor
+      }
     },
   },
   computed: {
@@ -57,13 +77,13 @@ export default {
   padding: 1%;
   padding-top: 0.1%;
   margin-top: -1%;
-  .topo{
+  .topo {
     display: flex;
     justify-content: space-around;
     padding: 2.1%;
-    .btn{
+    .btn {
       max-height: 50px;
-      .link{
+      .link {
         text-decoration: none;
         color: white;
       }
