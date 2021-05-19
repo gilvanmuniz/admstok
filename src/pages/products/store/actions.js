@@ -26,4 +26,10 @@ export const addProducts = ({ commit }, add ) => {
      })
  }
 
+ export const deleteProducts = ({ commit }, id) => [
+    Axios.delete('http://localhost:8081/products/' + id ).then(resp =>{
+        commit(types.DELETE_PRODUCTS, resp.data)
+    })
+ ]
+
 

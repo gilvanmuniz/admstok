@@ -31,8 +31,9 @@ import dados from '.';
               <router-link
                 v-bind:to="{ name: 'update', params: { id: dado.id } }"
               >
-              <button class="mybt">Up</button>
+              <button class="btn btn-primary">Up</button>
               </router-link>
+              <button v-on:click="excluirProduto(dado.id)" class="btn btn-danger ml-2">X</button>
             </div>
           </li>
         </ul>
@@ -51,7 +52,7 @@ export default {
     return {};
   },
   methods: {
-    ...mapActions("products", ["getProducts"]),
+    ...mapActions("products", ["getProducts", "deleteProducts"]),
 
     dinheiro(valor) {
       if (valor) {
@@ -62,6 +63,17 @@ export default {
         return "R$ " + valor
       }
     },
+
+    async excluirProduto(id){
+      try{
+        await this.deleteProducts(id)
+        //this.getProducts()
+        this.$router.go()
+      }
+      catch(e){
+        alert('Não foi possível excluir ' + e)
+      }
+    }
   },
   computed: {
     ...mapState(["products"]),

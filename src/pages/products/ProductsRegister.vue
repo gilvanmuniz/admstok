@@ -5,7 +5,7 @@
       <form>
         <div class="row">
           <label for="">Descrição</label>
-          <input v-model="form.name"  class="ml-3" type="text" />
+          <input v-model="form.name" class="ml-3" type="text" />
         </div>
         <div class="row">
           <label for="">Quantidade</label>
@@ -13,10 +13,12 @@
         </div>
         <div class="row">
           <label for="">Preço</label>
-          <input v-model="form.price"  class="ml-3" type="text" />
+          <input v-model="form.price" class="ml-3" type="text" />
         </div>
         <div class="botao">
-          <button v-on:click="addProdutos" class="btn btn-primary">Cadastrar</button>
+          <button v-on:click="addProdutos" class="btn btn-primary">
+            Cadastrar
+          </button>
         </div>
       </form>
     </div>
@@ -24,54 +26,53 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions } from "vuex";
 export default {
-  data(){
+  data() {
     return {
-      form:{
-        name: '',
-        amount: '',
-        price: ''
-      }
-    }
+      form: {
+        name: "",
+        amount: "",
+        price: "",
+      },
+    };
   },
   methods: {
-     ...mapActions('products', ['addProducts']),
-     
-     addProdutos(add){
-       add = {
-         name:this.form.name,
-         amount:this.form.amount,
-         price:this.form.price
-       }
-       this.addProducts(add)
+    ...mapActions("products", ["addProducts"]),
 
-      this.form.name = ''
-      this.form.amount = ''
-      this.form.price = ''
-     }
-  }
+    addProdutos(add) {
+      add = {
+        name: this.form.name,
+        amount: this.form.amount,
+        price: this.form.price,
+      };
+      this.addProducts(add);
+      this.form.name = "";
+      this.form.amount = "";
+      this.form.price = "";
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
-.main{
-    form{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        .row{
-            padding: 1.4%;
-            display: flex;
-            align-items: center;
-            input{
-                border: none;
-                border-bottom: 1px solid grey;
-            }
-            input:focus{
-                outline: none;
-            }
-        }
+.main {
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .row {
+      padding: 1.4%;
+      display: flex;
+      align-items: center;
+      input {
+        border: none;
+        border-bottom: 1px solid grey;
+      }
+      input:focus {
+        outline: none;
+      }
     }
+  }
 }
 </style>

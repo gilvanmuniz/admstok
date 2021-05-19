@@ -42,7 +42,7 @@ export default {
   data() {
     return {
       id: this.$route.params.id,
-      message: 'errrrror',
+      message: 'error',
       ok: false,
       error:false    
     };
