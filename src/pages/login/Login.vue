@@ -28,9 +28,9 @@ export default {
         username: this.username,
         password: this.password,
       };
-      Axios.post("http://localhost:8081/login", dados).then((response) => {
-        localStorage.setItem('token',response.data )
-        console.log(response.data);
+      Axios.post("http://localhost:8081/login", dados).then((response) => {        
+        localStorage.setItem('token', response.data)        
+        this.$router.push('/')
       });
     },
   },
@@ -48,19 +48,17 @@ export default {
     display: flex;
     flex-direction: column;
     width: 40%;
-    background-color: $secondary;
+    background-color: $light;
     padding: 4%;
     border-radius: 7%;
     input {
       border: none;
-      border-bottom: solid 0.5px $dark;
+      border-bottom: solid 0.5px $secondary;
     }
     input:focus {
       outline: none;
     }
-
-    button {
-    }
+    
   }
 }
 </style>

@@ -16,7 +16,7 @@
         <li>Categories</li>
       </router-link>
       <router-link to="/products">
-        <li>Products</li>
+        <li>Produtos</li>
       </router-link>
     </ul>
   </div>
