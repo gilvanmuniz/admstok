@@ -43,7 +43,7 @@ export default {
 
     mostraProdutos(id) {
       id != this.productId ? (this.productId = id) : (this.productId = "");
-      console.log(this.productId);
+      // console.log(this.productId);
     },
   },
   created() {
