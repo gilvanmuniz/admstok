@@ -20,7 +20,10 @@
         </div>
         <div class="row">
           <label for="">Preço</label>
-          <input v-model="produto.price" class="ml-3" type="text" />
+          <input 
+          v-model.lazy="produto.price"
+            v-money="money"
+           class="ml-3" type="text" />
         </div>
         <div class="botao">
           <button
@@ -38,13 +41,23 @@
 
 <script>
 import { mapState, mapActions } from "vuex";
+import { VMoney } from "v-money";
 export default {
+  directives: { money: VMoney },
   data() {
     return {
       id: this.$route.params.id,
       message: 'error',
       ok: false,
-      error:false    
+      error:false,      
+      money: {
+        decimal: ",",
+        thousands: ".",
+        prefix: "R$ ",
+        suffix: "",
+        precision: 2,
+        masked: false /* doesn't work with directive */,
+      },  
     };
   },
 
