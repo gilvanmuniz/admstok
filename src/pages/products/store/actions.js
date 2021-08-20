@@ -26,8 +26,10 @@ export const findProductById = ({ commit }, id) => {
             id: resp.data.id,
             name:resp.data.name,
             amount:resp.data.amount,
-            price:resp.data.price.toFixed(2)
+            price:resp.data.price.toFixed(2),
+            category:resp.data.category.id
       } 
+      console.log(dados)
     commit(types.FIND_PRODUCTS, dados);
    
   });

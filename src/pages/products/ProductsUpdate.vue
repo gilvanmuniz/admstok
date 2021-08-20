@@ -48,7 +48,7 @@
       <div class="botao">
         <button
           type="submit"
-          v-on:click="updateProduto(produto)"
+          v-on:click="updateProduto(produto, produto.price)"
           class="btn btn-warning"
         >
           Atualizar
@@ -86,13 +86,17 @@ export default {
   methods: {
     ...mapActions("products", ["findProductById", "updateProducts"]),
 
-    async updateProduto(produto) {
+    async updateProduto(produto, preco) {
+      preco = preco.replace(/\./g, "");
+      preco = preco.slice(3).replace(",", ".");
       const update = {
         id: produto.id,
         name: produto.name,
         amount: produto.amount,
-        price: produto.price,
+        price: preco,
+        category: { id: produto.category }
       };
+       console.log(update)
       try {
         await this.updateProducts(update);
         this.ok = true;

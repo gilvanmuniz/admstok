@@ -79,7 +79,6 @@ export default {
     addProdutos(add) {
       this.price = this.price.replace(/\./g, "");
       this.price = this.price.slice(3).replace(",", ".");
-
       add = {
         name: this.form.name,
         amount: this.form.amount,
