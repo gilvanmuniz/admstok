@@ -28,9 +28,10 @@ export default {
         username: this.username,
         password: this.password,
       };
-      Axios.post("http://localhost:8081/login", dados).then((response) => {        
-        localStorage.setItem('token', response.data)        
-        this.$router.push('/')
+      Axios.post("http://localhost:8081/login", dados).then((response) => {
+        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("username", response.data.username);
+        this.$router.push("/");
       });
     },
   },
@@ -58,7 +59,6 @@ export default {
     input:focus {
       outline: none;
     }
-    
   }
 }
 </style>
