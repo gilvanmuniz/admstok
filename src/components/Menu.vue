@@ -16,10 +16,10 @@
       <router-link to="/about">
         <li>Sobre nós</li>
       </router-link>
-      <router-link v-if="token" to="/categories">
+      <router-link v-if="session || token" to="/categories">
         <li>Categories</li>
       </router-link>
-      <router-link v-if="token" to="/products">
+      <router-link v-if="session || token" to="/products">
         <li>Produtos</li>
       </router-link>
     </ul>
@@ -28,15 +28,26 @@
 
 <script>
 export default {
+  data(){
+    return {
+       session: false
+    }
+  },
   computed: {
    
     username() {
       return localStorage.username;
     },
     token() {
-      return localStorage.token;
+      // return localStorage.token;
+      return this.$store.state.user.user.token
     },
   },
+  mounted(){
+    if(localStorage.token){
+      this.session = true
+    }
+  }
   
 };
 </script>

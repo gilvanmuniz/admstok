@@ -1,15 +1,6 @@
 <template>
-  <div id="nav">
-    <div class="login">
-      <div class="buttons">
-        <router-link to="/login">
-          <button class="btn btn-primary btn-sm">Login</button>
-        </router-link>
-        <router-link class="link ml-3 mt-2" to="#">
-          <h6>Cadastro</h6>
-        </router-link>
-      </div>
-    </div>
+  <div id="nav"> 
+    <MenuLogin />  
     <Menu />
     <hr />
   </div>
@@ -17,9 +8,11 @@
 </template>
 <script>
 import Menu from "./components/Menu";
+import MenuLogin from "./components/MenuLogin";
 export default {
   components: {
     Menu,
+    MenuLogin
   },
 };
 </script>
