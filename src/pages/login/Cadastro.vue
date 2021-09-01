@@ -1,45 +1,24 @@
 <template>
   <div class="main">
-    <div class="login">
-      <h2>Login</h2>
+       <div class="login">
+      <h2>Coloque seus dados</h2>
+      <label class="mt-2" for="email">Email:</label>
+      <input v-model="username" type="email" />
       <label class="mt-2" for="username">Username:</label>
       <input v-model="username" type="text" />
       <label class="mt-3" for="password">Password:</label>
       <input v-model="password" type="password" />
       <button v-on:click="enviarDadosLogin" class="btn btn-primary mt-3">
-        Login
+        Cadastrar
       </button>
-      <span class="mt-4"><a href="#">Esqueceu sua senha?</a></span>
     </div>
   </div>
 </template>
 
 <script>
-import Axios from "axios";
-import { mapActions } from 'vuex'
 export default {
-  data() {
-    return {
-      username: "",
-      password: "",
-    };
-  },
-  methods: {
-    ...mapActions('user', ['setUserLogin']),
-    enviarDadosLogin() {
-      const dados = {
-        username: this.username,
-        password: this.password,
-      };
-      Axios.post("http://localhost:8081/login", dados).then((response) => {
-        localStorage.setItem("token", response.data.token);
-        localStorage.setItem("username", response.data.username);
-        this.setUserLogin();
-      });
-      this.$router.push("/");
-    },
-  },
-};
+
+}
 </script>
 
 <style lang="scss" scoped>
@@ -59,6 +38,7 @@ export default {
     input {
       border: none;
       border-bottom: solid 0.5px $secondary;
+      background-color: $light;
     }
     input:focus {
       outline: none;

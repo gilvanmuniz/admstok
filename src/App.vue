@@ -17,7 +17,7 @@ export default {
 };
 </script>
 <style lang="scss">
-@import 'scss/colors.scss';
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -27,18 +27,6 @@ export default {
 }
 
 #nav {
-  .login {
-    width: 100%;
-    background-color: $light;
-    .buttons {
-      display: flex;
-      justify-content:flex-end;
-      align-items: center;
-      margin-right: 4%;
-      .link{
-        text-decoration: none;
-      }
-    }
-  }
+  
 }
 </style>
