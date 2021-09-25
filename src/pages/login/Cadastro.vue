@@ -1,14 +1,18 @@
 <template>
   <div class="main">
-       <div class="login">
+       <div v-if="confirmed" class="success">
+         <h4>Seu Cadastro foi realizado com sucesso!!</h4>
+         <h4>Confirme seu cadastro no seu email!!!</h4>
+       </div>
+       <div v-if="!confirmed" class="login">
       <h2>Coloque seus dados</h2>
       <label class="mt-2" for="email">Email:</label>
-      <input v-model="username" type="email" />
+      <input v-model="email" type="email" />
       <label class="mt-2" for="username">Username:</label>
       <input v-model="username" type="text" />
       <label class="mt-3" for="password">Password:</label>
       <input v-model="password" type="password" />
-      <button v-on:click="enviarDadosLogin" class="btn btn-primary mt-3">
+      <button v-on:click="enviarDadosCadastro" class="btn btn-primary mt-3">
         Cadastrar
       </button>
     </div>
@@ -16,8 +20,48 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
 export default {
+ data(){
+   return {
+      email: "",
+      username: "",
+      password: "",
+      confirmed:false
+   }
+ },
+  computed: {
+    ...mapState(["user"]),
+  },
 
+  methods: {
+
+    ...mapActions('user', ["usersRegisterAction", "emailConfirmed"]),
+    
+    async enviarDadosCadastro(){
+  
+        const user = {
+            email: this.email,
+            username: this.username,
+            password: this.password,
+        }
+        
+        await this.usersRegisterAction(user);
+
+        const email = {
+          emailTo: user.email,
+          subject: "Confimação de Cadastro",
+          text:   `<h4>Confimação do Seu Cadastro Adm Fullstack</h4>
+                  <td style="border-radius: 4px; background: #0095ff; color:white; text-align: center;">
+                      <a href="http://localhost:8080/#/registration?${user.email}" style="background: #0095FF; border: 1px solid #0077cc; box-shadow: inset 0 1px 0 0 rgba(102,191,255,.75); font-family: arial, sans-serif; font-size: 17px; line-height: 17px; color: #ffffff; text-align: center; text-decoration: none; padding: 13px 17px; display: block; border-radius: 4px;">
+                       Confirmar Cadastro
+                   </a>
+               </td>`,
+        }        
+        await this.emailConfirmed(email)
+        this.confirmed = true;
+    }
+  }
 }
 </script>
 
